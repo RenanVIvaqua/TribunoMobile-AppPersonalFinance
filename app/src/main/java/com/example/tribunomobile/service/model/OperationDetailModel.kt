@@ -1,11 +1,13 @@
 package com.example.tribunomobile.service.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.example.tribunomobile.service.enum.ParcelStatus
+import com.example.tribunomobile.service.enum.ParcelStatusConverter
+import com.example.tribunomobile.service.enum.TypeOperation
+import com.example.tribunomobile.service.enum.TypeOperationConverter
 import java.util.*
 
-@Entity(tableName = "OperationDetail")
+@Entity(tableName = "operationDetail")
 class OperationDetailModel {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -27,6 +29,9 @@ class OperationDetailModel {
     var paymentDate: String? = null
 
     @ColumnInfo(name = "status")
-    var status: String = ""
+    @TypeConverters(ParcelStatusConverter::class)
+    var status: ParcelStatus = ParcelStatus.Undefined
 
 }
+
+

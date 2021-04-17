@@ -14,6 +14,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.tribunomobile.R
+import com.example.tribunomobile.service.enum.TypeOperation
 import com.example.tribunomobile.view.ui.login.LoginActivity
 import com.example.tribunomobile.view.ui.registerOperation.RegisterOperationActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -62,13 +63,13 @@ class MainActivity : AppCompatActivity(),  View.OnClickListener {
             }
             R.id.action_addIncome -> {
                 val intent = Intent(this, RegisterOperationActivity::class.java)
-                intent.putExtra("typeOperation","true")
+                intent.putExtra(getString(R.string.parameterTypeOperation), TypeOperation.Income.value.toString())
                 startActivity(intent)
                 true
             }
             R.id.action_AddExpense -> {
                 val intent = Intent(this, RegisterOperationActivity::class.java)
-                intent.putExtra("typeOperation","true")
+                intent.putExtra(getString(R.string.parameterTypeOperation),TypeOperation.Expense.value.toString())
                 startActivity(intent)
                 true
             }

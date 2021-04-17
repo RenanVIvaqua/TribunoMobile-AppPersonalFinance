@@ -1,9 +1,8 @@
-package com.example.tribunomobile.service.repository.local.Operation
+package com.example.tribunomobile.service.repository.local.operation
 
 import androidx.room.*
 import com.example.tribunomobile.service.model.OperationModel
 import com.example.tribunomobile.service.model.OperationWithDetailModel
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface OperationDAO {
@@ -12,12 +11,12 @@ interface OperationDAO {
     fun save(operationModel: OperationModel): Long
 
     @Update
-    fun update(operationModel: OperationModel)
+    fun update(operationModel: OperationModel): Int
 
     @Delete
     fun delete(operationModel: OperationModel)
 
     @Transaction
-    @Query("select * from Operation")
+    @Query("select * from operation")
     fun getOperationWithDetail(): List<OperationWithDetailModel>
 }

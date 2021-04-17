@@ -3,7 +3,7 @@ package com.example.tribunomobile.view.ui.login
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.tribunomobile.service.repository.local.User.UserRepository
+import com.example.tribunomobile.service.repository.local.user.UserRepository
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 

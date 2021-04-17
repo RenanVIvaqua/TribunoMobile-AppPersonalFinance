@@ -1,4 +1,4 @@
-package com.example.tribunomobile.service.repository.local.User
+package com.example.tribunomobile.service.repository.local.user
 
 import androidx.room.*
 import com.example.tribunomobile.service.model.UserModel

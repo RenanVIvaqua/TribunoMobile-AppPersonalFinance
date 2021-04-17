@@ -5,14 +5,16 @@ import androidx.room.*
 import com.example.tribunomobile.service.model.OperationDetailModel
 import com.example.tribunomobile.service.model.UserModel
 import com.example.tribunomobile.service.model.OperationModel
-import com.example.tribunomobile.service.repository.local.User.UserDAO
-import com.example.tribunomobile.service.repository.local.Operation.OperationDAO
+import com.example.tribunomobile.service.repository.local.user.UserDAO
+import com.example.tribunomobile.service.repository.local.operation.OperationDAO
+import com.example.tribunomobile.service.repository.local.operationDetail.OperationDetailDAO
 
-@Database(entities = [UserModel::class, OperationModel::class, OperationDetailModel::class],version = 2)
+@Database(entities = [UserModel::class, OperationModel::class, OperationDetailModel::class],version = 4)
 abstract class AppDataBase : RoomDatabase(){
 
     abstract fun userDAO(): UserDAO
     abstract fun operationDAO(): OperationDAO
+    abstract fun operationDetailDAO(): OperationDetailDAO
 
     companion object{
         private lateinit var INSTANCE: AppDataBase

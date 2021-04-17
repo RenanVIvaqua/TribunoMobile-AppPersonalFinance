@@ -4,20 +4,16 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.tribunomobile.service.model.UserModel
-import com.example.tribunomobile.service.repository.local.User.UserRepository
+import com.example.tribunomobile.service.repository.local.user.UserRepository
 
 class RegisterViewModel(application: Application): AndroidViewModel(application) {
 
     private var mCreateAccount = MutableLiveData<UserValidate>()
     var createAccount = mCreateAccount
 
-    private var validationUser =
-        UserValidate()
+    private var validationUser = UserValidate()
 
-    private var userRepository: UserRepository =
-        UserRepository(
-            application
-        )
+    private var userRepository = UserRepository(application)
 
     fun validateAndCreateAccount(userModel: UserModel){
 

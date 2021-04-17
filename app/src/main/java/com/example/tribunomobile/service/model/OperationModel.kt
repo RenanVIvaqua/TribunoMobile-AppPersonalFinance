@@ -2,10 +2,14 @@ package com.example.tribunomobile.service.model
 
 import android.text.style.TtsSpan
 import androidx.room.*
+import com.example.tribunomobile.service.enum.StatusOperation
+import com.example.tribunomobile.service.enum.StatusOperationConverter
+import com.example.tribunomobile.service.enum.TypeOperation
+import com.example.tribunomobile.service.enum.TypeOperationConverter
 import java.time.Instant
 import java.util.*
 
-@Entity(tableName = "Operation")
+@Entity(tableName = "operation")
 
 class OperationModel {
 
@@ -20,7 +24,8 @@ class OperationModel {
     var nameOperation: String = ""
 
     @ColumnInfo(name = "typeOperation")
-    var typeOperation: String = ""
+    @TypeConverters(TypeOperationConverter::class)
+    var typeOperation: TypeOperation = TypeOperation.Undefined
 
     @ColumnInfo(name = "registerDate")
     var registerDate:  String? = null
@@ -29,6 +34,17 @@ class OperationModel {
     var alterDate: String? = null
 
     @ColumnInfo(name = "statusOperation")
-    var statusOperation: String = ""
+    @TypeConverters(StatusOperationConverter::class)
+    var statusOperation: StatusOperation = StatusOperation.Undefined
 
 }
+
+
+
+
+
+
+
+
+
+
