@@ -14,6 +14,6 @@
     <string name="titleIncomeRegisterActivity">Register Income</string>
     <string name="titleExpenseRegisterActivity">Register Expense</string>
     <string name="dateTimeFormat">dd/M/yyyy hh:mm:ss</string>
-    <string name="dateFormat">dd/M/yyyy</string>
+    <string name="dateFormat">dd/MM/yyyy</string>
     <string name="parameterTypeOperation">typeOperation</string>
 </resources>

@@ -23,10 +23,23 @@ class RegisterOperationViewModel(application: Application) : AndroidViewModel(ap
      {
          var idOperation = operationRepository.save(operationModel)
 
-         operationDetailRepository.saveList(listInstallment)
+         var listOperationInstallment = setIdOperationInInstallment(idOperation.toInt(), listInstallment)
+
+         operationDetailRepository.saveList(listOperationInstallment)
 
          _operationModel.value =  true
+    }
 
+    private fun setIdOperationInInstallment(id: Int,listOperationDetailModel: List<OperationDetailModel>): List<OperationDetailModel>{
+
+        var listOperation = mutableListOf<OperationDetailModel>()
+
+        for (item in listOperationDetailModel){
+
+            item.id = id
+            listOperation.add(item)
+        }
+        return listOperation
     }
 
 }

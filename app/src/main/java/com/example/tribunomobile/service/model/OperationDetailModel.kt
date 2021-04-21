@@ -6,6 +6,7 @@ import com.example.tribunomobile.service.enum.ParcelStatusConverter
 import com.example.tribunomobile.service.enum.TypeOperation
 import com.example.tribunomobile.service.enum.TypeOperationConverter
 import java.util.*
+import kotlin.String as String
 
 @Entity(tableName = "operationDetail")
 class OperationDetailModel {
@@ -32,6 +33,11 @@ class OperationDetailModel {
     @TypeConverters(ParcelStatusConverter::class)
     var status: ParcelStatus = ParcelStatus.Undefined
 
+    fun getNumber(): String =  "$number"
+
+    fun getValue(): String = "$value"
+
+    fun  getDate(): String = if(dueDate != null) "$dueDate" else ""
 }
 
 
