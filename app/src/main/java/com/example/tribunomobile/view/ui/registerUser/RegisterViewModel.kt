@@ -3,8 +3,10 @@ package com.example.tribunomobile.view.ui.registerUser
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.example.tribunomobile.service.enum.ErrorUser
 import com.example.tribunomobile.service.model.UserModel
 import com.example.tribunomobile.service.repository.local.user.UserRepository
+import com.example.tribunomobile.service.util.Validation.validationAddressEmail
 
 class RegisterViewModel(application: Application): AndroidViewModel(application) {
 
@@ -42,14 +44,6 @@ class RegisterViewModel(application: Application): AndroidViewModel(application)
 
         return validationUser
     }
-
-    private fun validationAddressEmail(email: String): Boolean{
-
-        if(!email.isNullOrBlank())
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-
-        return false
-    }
 }
 
 class UserValidate{
@@ -65,8 +59,3 @@ class UserValidate{
     }
 }
 
-enum class ErrorUser(Message: String){
-    ErrorRecord("Error trying record"),
-    AddressAlreadyRegistered("There is already registered email"),
-    AddressEmailIsInvalid("There is invalid address email")
-}

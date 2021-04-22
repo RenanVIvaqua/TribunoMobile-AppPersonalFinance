@@ -3,7 +3,6 @@ package com.example.tribunomobile.service.util
 import android.widget.EditText
 
 object Validation {
-
      fun validationFieldMandatory(editText: EditText, nameField: String = "", focusField: Boolean = true, messageField: Boolean = true): Boolean{
         if(editText.text.isNullOrEmpty()){
             if(messageField)
@@ -18,7 +17,6 @@ object Validation {
     }
 
     fun validationMinValueField(editText: EditText, nameField: String, minCharacters: Int): Boolean{
-
         val text=  editText.text
 
         if(text.count() <= minCharacters){
@@ -28,5 +26,13 @@ object Validation {
             return false
         }
         return true
+    }
+
+    fun validationAddressEmail(email: String): Boolean{
+
+        if(!email.isNullOrBlank())
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
+        return false
     }
 }

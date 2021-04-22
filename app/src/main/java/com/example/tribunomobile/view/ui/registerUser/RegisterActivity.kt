@@ -9,7 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.tribunomobile.R
+import com.example.tribunomobile.service.enum.ErrorUser
 import com.example.tribunomobile.service.model.UserModel
+import com.example.tribunomobile.service.util.Validation.validationFieldMandatory
+import com.example.tribunomobile.service.util.Validation.validationMinValueField
 import com.example.tribunomobile.view.ui.login.LoginActivity
 import com.example.tribunomobile.view.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_register.*
@@ -38,7 +41,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         if(id == R.id.buttonCreateRegister){
 
-            if(!validationFieldMandatory(editName,"Name") || !validationFieldMandatory(editAddress,"Address") || !validationFieldMandatory(editPassword,"Password"))
+            if(!validationFieldMandatory(editName) || !validationFieldMandatory(editAddress) || !validationFieldMandatory(editPassword))
                 return
 
             if(!validationMinValueField(editPassword, "Password", 5))
@@ -72,8 +75,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                         validationAddressEmailError(editAddress, ErrorUser.AddressAlreadyRegistered)
                     }
                     ErrorUser.AddressEmailIsInvalid -> {
-                        validationAddressEmailError(editAddress,
-                            ErrorUser.AddressEmailIsInvalid)
+                        validationAddressEmailError(editAddress, ErrorUser.AddressEmailIsInvalid)
                     }
                     else -> Toast.makeText(this,it.error.toString(),Toast.LENGTH_SHORT).show()
                 }
@@ -81,8 +83,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    private fun validationAddressEmailError(editText: EditText, errorType: ErrorUser){
-        editText.error = errorType.toString()
+    private fun validationAddressEmailError(editText: EditText, errorUser: ErrorUser){
+        editText.error = errorUser.value
         editText.isFocusable = true
         editText.requestFocus()
     }
@@ -91,32 +93,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         if (supportActionBar != null)
             supportActionBar!!.hide()
     }
-
-    private fun validationFieldMandatory(editText: EditText, nameField: String): Boolean{
-        if(editText.text.isNullOrEmpty()){
-            editText.error = "$nameField is mandatory"
-            editText.isFocusable = true
-            editText.requestFocus()
-            return false
-        }
-
-        return true
-    }
-
-    private  fun validationMinValueField(editText: EditText, nameField: String, minCharacters: Int): Boolean{
-
-        val text=  editText.text
-
-        if(text.count() <= minCharacters){
-            editText.error = " $nameField must be longer than $minCharacters characters"
-            editText.isFocusable = true
-            editText.requestFocus()
-            return false
-        }
-
-        return true
-    }
-
 }
 
 

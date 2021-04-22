@@ -34,6 +34,7 @@
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"
         />
 
@@ -43,6 +44,8 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@+id/txtNameOperator"
+        android:drawableRight="@drawable/ic_baseline_credit_card_24"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
@@ -55,6 +58,7 @@
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNameOperator" />
 
     <Spinner
@@ -64,6 +68,7 @@
         android:background="@android:drawable/btn_dropdown"
         app:layout_constraintTop_toBottomOf="@+id/txtTypeOperation"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:spinnerMode="dropdown"/>
 
     <TextView
@@ -76,6 +81,7 @@
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
 
     <EditText
@@ -84,6 +90,8 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@+id/txtCountInstallments"
+        android:drawableRight="@drawable/ic_baseline_format_list_numbered_24"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
 
@@ -97,6 +105,7 @@
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCountInstallments" />
 
     <EditText
@@ -104,7 +113,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:drawableRight="@drawable/ic_baseline_monetization_on_24"
         app:layout_constraintTop_toBottomOf="@+id/txtInstallmentsValue"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
@@ -117,23 +128,29 @@
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editInstallmentsValue" />
 
     <EditText
         android:id="@+id/editDueDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
+        android:inputType="none"
+        android:enabled="true"
         app:layout_constraintTop_toBottomOf="@+id/txtDueDate"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:drawableRight="@drawable/ic_baseline_calendar_today_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
     <ListView
         android:id="@+id/listInstallments"
-        android:layout_marginTop="10dp"
-        android:layout_width="370dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="350dp"
         android:layout_height="140dp"
-        android:background="@color/gray"
+        android:background="@drawable/rounded_corners"
         app:layout_constraintTop_toBottomOf="@+id/editDueDate"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
@@ -142,8 +159,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
+        android:backgroundTint="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/listInstallments"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

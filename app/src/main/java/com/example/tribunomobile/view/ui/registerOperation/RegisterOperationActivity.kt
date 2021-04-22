@@ -3,6 +3,7 @@ package com.example.tribunomobile.view.ui.registerOperation
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.example.tribunomobile.service.enum.TypeOperation
 import com.example.tribunomobile.service.enum.TypeOperationConverter
 import com.example.tribunomobile.service.model.OperationDetailModel
 import com.example.tribunomobile.service.model.OperationModel
+import com.example.tribunomobile.service.util.MaskEditUtil
 import com.example.tribunomobile.service.util.Validation
 import com.example.tribunomobile.view.adapter.OperationDetailAdapter
 import kotlinx.android.synthetic.main.activity_register_operation.*
@@ -22,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class RegisterOperationActivity : AppCompatActivity(), View.OnClickListener {
+class RegisterOperationActivity : AppCompatActivity(), View.OnClickListener, View.OnTouchListener {
 
     private lateinit var operationViewModel: RegisterOperationViewModel
 
@@ -42,12 +44,30 @@ class RegisterOperationActivity : AppCompatActivity(), View.OnClickListener {
 
         editInstallmentsValue.setOnFocusChangeListener { _, boolean -> checkGeneratingInstallments(boolean) }
         editCountInstallments.setOnFocusChangeListener { _, boolean -> checkGeneratingInstallments(boolean) }
-        editDueDate.setOnFocusChangeListener { _, boolean -> checkGeneratingInstallments(boolean) }
 
-        editDueDate.setOnClickListener(this)
+        editDueDate.setOnTouchListener(this)
         buttonSave.setOnClickListener(this)
 
         observe()
+    }
+
+    override fun onTouch(v: View, event: MotionEvent): Boolean {
+        val id = v.id
+
+        if (event.action == MotionEvent.ACTION_DOWN && id == R.id.editDueDate) {
+            val editText = findViewById<View>(R.id.editDueDate) as EditText
+
+            val date = OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                calendar[Calendar.YEAR] = year
+                calendar[Calendar.MONTH] = monthOfYear
+                calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+
+                updateEditTextDate(editText, calendar)
+                checkGeneratingInstallments()
+            }
+            DatePickerDialog(this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
+        return true
     }
 
     override fun onClick(v: View) {
@@ -71,21 +91,6 @@ class RegisterOperationActivity : AppCompatActivity(), View.OnClickListener {
             bindListView(listInstallment)
 
             operationViewModel.save(operationModel, listInstallment)
-        }
-        if(id == R.id.editDueDate){
-
-            val editText = findViewById<View>(R.id.editDueDate) as EditText
-
-            val date = OnDateSetListener { _, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
-                calendar[Calendar.YEAR] = year
-                calendar[Calendar.MONTH] = monthOfYear
-                calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-
-                updateEditTextDate(editText, calendar)
-               // generateInstallmentsAndBindListView()
-            }
-
-            DatePickerDialog(this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
     }
 
@@ -123,22 +128,22 @@ class RegisterOperationActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun checkOperationHasInstallment(): Boolean{
+        val countList = listInstallment.count()
+        checkGeneratingInstallments()
 
         if(listInstallment.count() < 1) {
-            checkGeneratingInstallments()
-
-            if(listInstallment.count() < 1)
-                Toast.makeText(this, "Nenhuma parcela foi gerada", Toast.LENGTH_SHORT).show()
-            else {
-                Toast.makeText(this, "Parcelas geradas", Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(this, "Nenhuma parcela foi gerada", Toast.LENGTH_SHORT).show()
             return false
         }
+        else if(listInstallment.count() != countList) {
+            Toast.makeText(this, "Novas parcelas fora gerado", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         return true
     }
 
     private fun validationField():Boolean{
-
         if( Validation.validationFieldMandatory(editNameOperator) &&
            // Validation.validationFieldMandatory(editTypeOperation) &&
             Validation.validationFieldMandatory(editCountInstallments) &&
@@ -146,7 +151,6 @@ class RegisterOperationActivity : AppCompatActivity(), View.OnClickListener {
             Validation.validationFieldMandatory(editDueDate)) {
             return true
         }
-
         return false
     }
 
@@ -184,10 +188,14 @@ class RegisterOperationActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun bindListView(listOperationDetailModel: List<OperationDetailModel>){
-         val adapter = OperationDetailAdapter(listOperationDetailModel, this)
-         val listAdapter: ListView = findViewById<View>(R.id.listInstallments) as ListView
+        val adapter = OperationDetailAdapter(listOperationDetailModel, this)
+        val listAdapter: ListView = findViewById<View>(R.id.listInstallments) as ListView
+        val footerView: View = layoutInflater.inflate(R.layout.header_list_operation_detail, null)
 
-         listAdapter.adapter = adapter;
+        if(listAdapter.headerViewsCount < 1)
+            listAdapter.addHeaderView(footerView)
+
+        listAdapter.adapter = adapter
      }
 
     private fun generateInstallmentsAndBindListView(){
