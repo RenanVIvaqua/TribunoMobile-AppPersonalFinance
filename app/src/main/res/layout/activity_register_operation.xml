@@ -51,19 +51,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
-        android:text="Operation type"
+        android:text="Category"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNameOperator" />
 
-    <EditText
-        android:id="@+id/editTypeOperation"
+    <Spinner
+        android:id="@+id/spinnerCategory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
+        android:layout_height="30dp"
+        android:background="@android:drawable/btn_dropdown"
         app:layout_constraintTop_toBottomOf="@+id/txtTypeOperation"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:spinnerMode="dropdown"/>
 
     <TextView
         android:id="@+id/txtCountInstallments"
@@ -75,7 +76,7 @@
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTypeOperation" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
 
     <EditText
         android:id="@+id/editCountInstallments"
@@ -140,9 +141,9 @@
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="140dp"
         android:text="Save"
         app:layout_constraintTop_toBottomOf="@+id/listInstallments"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,8 +24,7 @@ class OperationModel {
     var nameOperation: String = ""
 
     @ColumnInfo(name = "typeOperation")
-    @TypeConverters(TypeOperationConverter::class)
-    var typeOperation: TypeOperation = TypeOperation.Undefined
+    var typeOperation: Int = TypeOperation.Undefined.value
 
     @ColumnInfo(name = "registerDate")
     var registerDate:  String? = null

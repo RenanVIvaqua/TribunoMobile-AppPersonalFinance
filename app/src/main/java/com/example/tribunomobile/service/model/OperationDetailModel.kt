@@ -12,10 +12,10 @@ import kotlin.String as String
 class OperationDetailModel {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id: Int = 0
+    var id: Long = 0
 
     @ColumnInfo(name = "idOperation")
-    var idOperation: Int = 0
+    var idOperation: Long = 0
 
     @ColumnInfo(name = "number")
     var number: Int = 0

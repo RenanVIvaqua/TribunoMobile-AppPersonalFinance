@@ -9,7 +9,7 @@ import com.example.tribunomobile.service.repository.local.user.UserDAO
 import com.example.tribunomobile.service.repository.local.operation.OperationDAO
 import com.example.tribunomobile.service.repository.local.operationDetail.OperationDetailDAO
 
-@Database(entities = [UserModel::class, OperationModel::class, OperationDetailModel::class],version = 4)
+@Database(entities = [UserModel::class, OperationModel::class, OperationDetailModel::class],version = 6)
 abstract class AppDataBase : RoomDatabase(){
 
     abstract fun userDAO(): UserDAO
